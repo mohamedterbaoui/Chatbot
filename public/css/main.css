@@ -1,0 +1,12 @@
+ul {
+    list-style-type: none;
+    background-color: bisque;
+}
+
+li {
+    font-size: large;
+}
+
+.media { 
+    background-color: thistle;
+}
