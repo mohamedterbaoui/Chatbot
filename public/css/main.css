@@ -10,3 +10,17 @@ li {
 .media { 
     background-color: thistle;
 }
+
+.message {
+    padding: 15px;
+    background-color: tomato;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+.bot-message {
+    padding: 15px;
+    background-color: rgb(97, 131, 251);
+    border-radius: 15px;
+    width: fit-content;
+}
