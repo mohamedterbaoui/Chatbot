@@ -10,6 +10,12 @@ let user = {message : ""};
 // Chat container
 const chatContainer = document.querySelector('#chatContainer');
 
+textbox.addEventListener('keypress', function(event) {
+    if (event.key === "Enter") {
+        sendBtn.click();
+    }
+})
+
 sendBtn.addEventListener('click', function(e) {
 
     let userMessage = textbox.value;
@@ -37,10 +43,20 @@ function sendMessage(userMessage) {
 }
 
 function chatbotResponse(userMessage) {
-    const botMessage = document.createElement("h4");
 
-    botMessage.textContent = userMessage;
-    botMessage.classList.add("bot-message");
+    fetch('/chat', {
+        method : 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: userMessage })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const botMessage = document.createElement("h4");
+        botMessage.textContent = data.reply;
+        botMessage.classList.add("bot-message");
+        chatContainer.appendChild(botMessage);
+    })
+    .catch(error => console.error('Error', error));
 
-    chatContainer.appendChild(botMessage);
+
 }

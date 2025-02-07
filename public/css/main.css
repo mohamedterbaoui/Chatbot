@@ -12,6 +12,7 @@ li {
 }
 
 .message {
+    text-align: right;
     padding: 15px;
     background-color: tomato;
     border-radius: 15px;
@@ -23,4 +24,5 @@ li {
     background-color: rgb(97, 131, 251);
     border-radius: 15px;
     width: fit-content;
+    text-align: left;
 }
