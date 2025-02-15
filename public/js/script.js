@@ -29,10 +29,13 @@ function sendMessage(userMessage) {
 
 // Function to display bot's response
 function chatbotResponse(userMessage) {
+  const maxTokens = document.querySelector("#maxTokens").value;
+  const temperature = document.querySelector("#temperature").value;
+
   fetch("/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: userMessage }),
+    body: JSON.stringify({ message: userMessage, maxTokens, temperature }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -44,6 +47,15 @@ function chatbotResponse(userMessage) {
     })
     .catch((error) => console.error("Error", error));
 }
+
+// Update displayed values when sliders move
+document.querySelector("#maxTokens").addEventListener("input", function () {
+  document.querySelector("#maxTokensValue").textContent = this.value;
+});
+
+document.querySelector("#temperature").addEventListener("input", function () {
+  document.querySelector("#temperatureValue").textContent = this.value;
+});
 
 // Allow user to send message by pressing "Enter"
 textbox.addEventListener("keypress", function (event) {

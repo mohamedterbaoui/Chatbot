@@ -21,13 +21,18 @@ app.get("/", function (req, res) {
 // AI chatbot route using Hugging Face API
 app.post("/chat", async function (req, res) {
   let userMessage = req.body.message;
+  let maxTokens = req.body.maxTokens || 500;
+  let temperature = req.body.temperature || 0.5;
 
   try {
     let response = await axios.post(
       "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3",
       {
         inputs: userMessage,
-        parameters: { max_new_tokens: 500, temperature: 0.5 },
+        parameters: {
+          max_new_tokens: parseInt(maxTokens),
+          temperature: parseFloat(temperature),
+        },
       },
       {
         headers: { Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}` },
